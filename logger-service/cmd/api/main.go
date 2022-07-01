@@ -65,17 +65,17 @@ func main() {
 
 }
 
-func (app *Config) serve() {
-	srv := &http.Server{
-		Addr:    fmt.Sprintf(":%s", webPort),
-		Handler: app.routes(),
-	}
+// func (app *Config) serve() {
+// 	srv := &http.Server{
+// 		Addr:    fmt.Sprintf(":%s", webPort),
+// 		Handler: app.routes(),
+// 	}
 
-	err := srv.ListenAndServe()
-	if err != nil {
-		log.Panic()
-	}
-}
+// 	err := srv.ListenAndServe()
+// 	if err != nil {
+// 		log.Panic()
+// 	}
+// }
 
 func connectToMongo() (*mongo.Client, error) {
 	// create options
@@ -91,5 +91,8 @@ func connectToMongo() (*mongo.Client, error) {
 		log.Println("Error connecting:", err)
 		return nil, err
 	}
+
+	log.Println("Connected to mongo!")
+
 	return c, nil
 }

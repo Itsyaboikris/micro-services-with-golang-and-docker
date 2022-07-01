@@ -62,7 +62,7 @@ func (l *LogEntry) All() ([]*LogEntry, error) {
 
 	cursor, err := collection.Find(context.TODO(), bson.D{}, opts)
 	if err != nil {
-		log.Println()
+		log.Println("Finding all docs error:", err)
 		return nil, err
 	}
 	defer cursor.Close(ctx)
@@ -145,5 +145,5 @@ func (l *LogEntry) Update() (*mongo.UpdateResult, error) {
 		return nil, err
 	}
 
-	return result, err
+	return result, nil
 }
