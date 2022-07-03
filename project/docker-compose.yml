@@ -52,6 +52,14 @@ services:
             FROM_NAME: "John doe"
             FROM_ADDRESS: john.doe@mail.com
 
+    listener-service:
+        build:
+            context: ./../listener-service
+            dockerfile: ./../listener-service/listener-service.dockerfile
+        deploy:
+            mode: replicated
+            replicas: 1
+
     postgres:
         image: 'postgres:14.0'
         ports:
@@ -87,8 +95,20 @@ services:
             - "1025:1025"
             - "8025:8025"
 
+    rabbitmq:
+        image: 'rabbitmq:3.9-alpine'
+        ports:
+            - "5672:5672"
+        deploy: 
+            mode: replicated
+            replicas: 1
+        volumes:
+            - rabbitmq_volume:/var/lib/rabbitmq/
+
 volumes:
     db_volume:
         external: true
     mongo_volume:
+        external: true
+    rabbitmq_volume:
         external: true
