@@ -67,7 +67,7 @@
 				headers: headers,
 			}
 
-			fetch("http:\/\/localhost:8080/handle", body).then(
+			fetch({{print .BrokerURL "/handle"}}, body).then(
 				(response) => response.json()
 			).then(
 				(data) => {
@@ -102,7 +102,7 @@
 				headers: headers,
 			}
 
-			fetch("http:\/\/localhost:8080/log-grpc", body).then(
+			fetch({{print .BrokerURL "/log-grpc"}}, body).then(
 				(response) => response.json()
 			).then(
 				(data) => {
@@ -124,7 +124,7 @@
 				method: 'POST'
 			}
 
-			fetch("http:\/\/localhost:8080", body).then(
+			fetch({{.BrokerURL}}, body).then(
 				(response) => response.json()
 			).then(
 				(data) => {
@@ -158,7 +158,7 @@
 				headers: headers,
 			}
 
-			fetch("http:\/\/localhost:8080/handle", body).then(
+			fetch({{print .BrokerURL "/handle"}}, body).then(
 				(response) => response.json()
 			).then(
 				(data) => {
@@ -193,7 +193,7 @@
 				headers: headers,
 			}
 
-			fetch("http:\/\/localhost:8080/handle", body).then(
+			fetch({{print .BrokerURL "/handle"}}, body).then(
 				(response) => response.json()
 			).then(
 				(data) => {
