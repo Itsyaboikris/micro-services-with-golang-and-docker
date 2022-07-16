@@ -1,11 +1,26 @@
 version: '3'
 
 services:
-    front-end:
-        image: christoffbrown/front-end:1.0.0
+
+    caddy:
+        image: christoffbrown/micro-caddy:1.0.0
         deploy:
             mode: replicated
-            replicated: 1
+            replicas: 1
+        ports: 
+            - "80:80"
+            - "443:443"
+        volumes: 
+            - caddy_data:/data
+            - caddy_config:/config
+
+    front-end:
+        image: christoffbrown/front-end:1.0.1
+        deploy:
+            mode: replicated
+            replicas: 1
+        environment:
+            BROKER_URL: "http://backend"
 
     broker-service:
         image: christoffbrown/broker-service:1.0.1
@@ -76,7 +91,7 @@ services:
             - mongo_volume:/data/db
 
     postgres:
-        image: 'postgres:14.0'
+        image: 'postgres:14.2'
         ports:
             - "5432:5432"
         deploy:
@@ -95,3 +110,6 @@ volumes:
         external: true
     rabbitmq_volume:
         external: true
+    caddy_data:
+        external: true
+    caddy_config:
